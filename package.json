@@ -16,6 +16,7 @@
     "@astrojs/react": "^2.0.2",
     "@astrojs/tailwind": "^3.0.1",
     "@astrojs/vercel": "^3.2.0",
+    "@fontsource/montserrat": "^4.5.14",
     "@fontsource/twinkle-star": "^4.5.9",
     "@nanostores/react": "^0.4.1",
     "@types/react": "^18.0.28",
