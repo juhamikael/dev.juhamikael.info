@@ -10,7 +10,7 @@ import preact from "@astrojs/preact";
 import lit from "@astrojs/lit";
 
 // https://astro.build/config
-import netlify from "@astrojs/netlify/functions";
+import netlify from '@astrojs/netlify/edge-functions';
 
 // https://astro.build/config
 export default defineConfig({
