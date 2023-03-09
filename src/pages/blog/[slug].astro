@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import createSlug from "../../lib/createSlug";
+import { getDate } from "../../lib/utils";
+import Icon from "astro-icon";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const blog = await getCollection("blog");
+  return blog.map((post) => ({
+    params: { slug: createSlug(post.data.title) },
+    props: post,
+  }));
+}
+const { data, render } = Astro.props;
+const { Content } = await render();
+---
+
+<Layout>
+  <main class="mt-10 font-montserrat text-gray-300">
+    <div class="flex justify-center">
+      <div class="mx-6 flex-col">
+        <h1 class="text-3xl font-bold">{data.title}</h1>
+        <h2 class="mb-4">
+          <span class="font-bold">Subject:</span>
+          <span class="italic">{data.subject}</span>
+        </h2>
+        <div class="flex flex-row place-items-center">
+          <Icon pack="ion" name="calendar-clear-outline" class="mr-2 w-5" />
+          {getDate(data.createdAt)}
+        </div>
+
+        {
+          getDate(data.createdAt) !== getDate(data.updatedAt) && (
+            <div class="flex flex-row place-items-center text-base italic text-yellow-200">
+              <Icon pack="ion" name="calendar-outline" class="mr-2 w-5" />
+              <span class="text-xs">Updated: {getDate(data.updatedAt)}</span>
+            </div>
+          )
+        }
+        <div class="my-6 mt-4 h-px border-0 bg-gray-500"></div>
+
+        <div
+          class="prose mt-5 text-sm leading-7 tracking-wide text-gray-300 prose-headings:text-gray-300 prose-headings:underline prose-a:text-blue-300 prose-em:text-yellow-100"
+        >
+          <Content />
+        </div>
+        <a
+          href="/blog"
+          class="mt-10 flex text-lg font-bold text-yellow-200 hover:text-blue-300"
+        >
+          <Icon pack="ion" name="arrow-back-outline" class="mr-2 w-5" />
+          Back to blog posts
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

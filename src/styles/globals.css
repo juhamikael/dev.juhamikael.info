@@ -1,0 +1,28 @@
+/* Zoom Effect for cards */
+.zoom:hover {
+  transform: scale(1.05);
+}
+
+.zoom {
+  transition: transform 0.3s ease-in-out;
+}
+
+.zoom:hover h1.change-text-color {
+  color: rgb(96 165 250 / var(--tw-text-opacity)) !important;
+
+  /**Wait Smooth 0.3sec */
+  transition: color 0.3s ease-in-out;
+}
+
+/* Mostly used in ../components/astro/Wecolme.astro*/
+
+.text-small {
+  font-size: 0.6rem;
+}
+
+.smooth-transition:hover > svg {
+  transform: scale(1.1);
+}
+.point {
+  cursor: pointer;
+}

@@ -1,35 +1,65 @@
 ---
 export interface Props {
-	title: string;
+  title?: string;
 }
 
-const { title } = Astro.props;
+import NavBar from "../components/astro/NavBar.astro";
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
+const currentPathCapitalized =
+  currentPath.charAt(0).toUpperCase() + currentPath.slice(1);
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>
+      {`Juha Mikael / ${pathname == "/" ? "Home" : currentPathCapitalized}`}
+    </title>
+    <script>
+      import "../components/ts/CopyCodeButton/copyCodeButton.js";
+      import "../components/ts/CopyCodeButton/createCopyButton.js";
+      import "../components/ts/CopyCodeButton/styles.css";
+      import "../lib/iconsMap.ts";
+    </script>
+    <!-- import stylesheet from  ../components/ts/CopyCodeButton/styles.css -->
+  </head>
+  <body>
+    <NavBar />
+    <slot />
+  </body>
 </html>
 <style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
+  :root {
+    --accent: 124, 58, 237;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      #da62c4 30%,
+      white 60%
+    );
+    background-color: #0f0f0f;
+    color: #f0f0f0;
+    font-family: "Montserrat", sans-serif;
+    margin: 7rem 0 5rem 0;
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    background-color: #f0f0f;
+  }
+  code {
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  }
+
+  .astro-code {
+    background-color: #292929 !important;
+    box-shadow: #ffffff13 0px 0px 0px 1px inset !important;
+    padding: 3rem !important;
+  }
 </style>
