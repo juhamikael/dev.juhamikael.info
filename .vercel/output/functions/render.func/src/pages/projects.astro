@@ -1,0 +1,101 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Projects from "../components/ts/Projects";
+import createSlug from "../lib/createSlug";
+import { Icon } from "astro-icon";
+
+const allProjects = await getCollection("projects");
+
+const recentProjects = [...allProjects].sort(
+  (a, b) =>
+    (new Date(b.data.date) as unknown as number) -
+    (new Date(a.data.date) as unknown as number)
+);
+
+async function getStaticPaths() {
+  const about = await getCollection("projects");
+  return about.map((text) => ({
+    props: text,
+  }));
+}
+const staticPath = await getStaticPaths();
+const { data, render } = staticPath[0].props;
+const { Content } = await render();
+---
+
+<Layout>
+  <div class="flex justify-center text-white">
+    <div class="mx-4 lg:w-1/2">
+      {
+        recentProjects.map((project) => (
+          <>
+            <div
+              class="mt-4 rounded-xl border border-white/10 p-5"
+              id={project.data.id}
+            >
+              <Projects
+                title={project.data.title}
+                tags={project.data.tags}
+                body={project.body}
+                image={project.data.image}
+              />
+
+              <div class="ml-4 flex place-items-center space-x-6">
+                {project.data.github !== "" && (
+                  <a
+                    href={project.data.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="flex flex-row place-items-center text-sm font-bold text-yellow-400 hover:text-green-400"
+                  >
+                    <Icon pack="ion" name="logo-github" class="mr-1 w-6" />
+                    Github
+                  </a>
+                )}
+
+                {project.data.liveDemo !== "" && (
+                  <a
+                    href={project.data.liveDemo}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="flex flex-row place-items-center text-sm font-bold text-yellow-400 hover:text-green-400"
+                  >
+                    <Icon
+                      pack="ph"
+                      name="projector-screen-chart-light"
+                      class="mr-1 w-6"
+                    />
+                    Live Demo
+                  </a>
+                )}
+                {project.data.download && (
+                  <a
+                    href={project.data.download}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="flex flex-row place-items-center text-sm font-bold text-yellow-400 hover:text-green-400"
+                  >
+                    <Icon pack="ic" name="baseline-download" class="mr-1 w-6" />
+                    Download
+                  </a>
+                )}
+                {project.data.blog && (
+                  <a
+                    href={`/blogs/${createSlug(project.data.title)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="flex flex-row place-items-center text-sm font-bold text-yellow-400 hover:text-green-400"
+                  >
+                    <Icon pack="mdi" name="blog-outline" class="mr-1 w-6" />
+                    Blog Post
+                  </a>
+                )}
+              </div>
+            </div>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

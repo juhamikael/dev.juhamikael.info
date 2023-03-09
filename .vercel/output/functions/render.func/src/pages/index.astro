@@ -1,0 +1,17 @@
+---
+import Icon from "astro-icon";
+import ProjectGrid from "../components/astro/ProjectGrid.astro";
+import Welcome from "../components/astro/Welcome.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="mx-5">
+    <Welcome />
+    <div class="flex justify-center">
+      <div class="my-6 mt-4 w-full border border-gray-200/20 lg:w-1/2"></div>
+    </div>
+
+    <ProjectGrid />
+  </div>
+</Layout>
