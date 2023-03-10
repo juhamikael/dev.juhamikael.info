@@ -22,6 +22,11 @@ const IconsObject: {
     name: "file-type-typescript-official",
     alt: "Typescript",
   },
+  javascript: {
+    pack: "vscode-icons",
+    name: "file-type-light-js",
+    alt: "Javascript",
+  },
   python: {
     pack: "vscode-icons",
     name: "file-type-python",
@@ -32,12 +37,17 @@ const IconsObject: {
     name: "file-type-reactjs",
     alt: "React",
   },
+  nextjs: {
+    pack: "vscode-icons",
+    name: "file-type-next",
+    alt: "NextJS",
+  },
   tailwind: {
     pack: "vscode-icons",
     name: "file-type-tailwind",
     alt: "Tailwind",
   },
-  javascript: {
+  astro: {
     pack: "vscode-icons",
     name: "file-type-astro",
     alt: "Astro",
@@ -48,151 +58,157 @@ const IconsObject: {
     alt: "Git",
   },
 
-  sql: {
+  mysql: {
     pack: "vscode-icons",
-    name: "file-type-sql",
-    alt: "SQL",
+    name: "file-type-mysql",
+    alt: "MySQL",
+    class: "text-white",
+  },
+  postgre: {
+    pack: "vscode-icons",
+    name: "file-type-pgsql",
+    alt: "PostgreSQL",
     class: "text-white",
   },
 };
 ---
 
-<div class="mb-10 flex justify-center">
-  <div class="grid lg:w-1/2 lg:grid-cols-4">
-    <section class="col-span-1 col-start-1 flex flex-row place-items-center">
-      <img
-        src={image}
-        alt="Profile picture"
-        style="align-self:flex-start; object-fit: cover; object-position: right;"
-        class="w-max rounded-xl"
-      />
-    </section>
-    <div class="col-span-4 col-start-2 mx-6 flex flex-col place-content-center">
-      <section class="flex place-items-center">
-        <div class="flex flex-col">
-          <h1 class="text-xl">Hi, I'm Juha Mikael</h1>
-          <h1>
-            Software Developer Student at <a
-              href="https://www.tuni.fi/en/about-us/tamk"
-              target="_blank"
-              class="underline hover:text-blue-400">TAMK</a
+<div
+  class="mb-10 flex flex-col items-center justify-center md:flex-row md:items-start md:items-start"
+>
+  <img
+    src={image}
+    alt="Profile picture"
+    class="w-96 rounded-xl object-cover object-right md:mr-6 md:w-48"
+  />
+  <div class="mt-6 md:mt-0">
+    <h1 class="text-xl font-bold">Hi, I'm Juha Mikael</h1>
+    <h2 class="mt-2 text-sm font-medium">
+      Software Developer <strong>Student</strong>
+    </h2>
+    <div class="my-4 w-full border border-gray-200/20"></div>
+
+    <div class="mb-4 flex space-x-2">
+      {
+        Object.keys(IconsObject).map((key) => {
+          return (
+            <div
+              id={`show-logo-text-${key}`}
+              class="smooth-transition flex cursor-pointer place-items-center space-x-1"
+              onclick="showText(event)"
             >
-          </h1>
-        </div>
-      </section>
-      <section class="mt-2 flex place-items-center">
-        <div class="flex flex-row space-x-3">
-          {
-            Object.keys(IconsObject).map((key) => {
-              return (
-                <div
-                  id={`show-logo-text-${key}`}
-                  class="smooth-transition flex flex-row place-items-center space-x-1"
-                  onclick="showText(event)"
-                >
-                  <Icon
-                    pack={IconsObject[key].pack}
-                    name={IconsObject[key].name}
-                    class={`point w-6 ${
-                      IconsObject[key].class ? IconsObject[key].class : ""
-                    }`}
-                  />
-                </div>
-              );
-            })
-          }
-        </div>
-      </section>
-      <div class="flex justify-center">
-        <div class="my-4 w-full border border-gray-200/20"></div>
-      </div>
-      <section
-        class="prose col-span-4 col-start-2 text-sm text-white prose-a:text-yellow-400 prose-a:underline"
-      >
-        <Content />
-      </section>
+              <Icon
+                pack={IconsObject[key].pack}
+                name={IconsObject[key].name}
+                class={`w-4 md:w-5 lg:w-6 ${
+                  IconsObject[key].class ? IconsObject[key].class : ""
+                }`}
+              />
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <div
+      class="prose text-sm text-white prose-a:text-yellow-400 prose-a:underline"
+    >
+      <Content />
     </div>
   </div>
+</div>
 
-  <script is:inline is:module>
-    const IconsObject = {
-      typescript: {
-        pack: "vscode-icons",
-        name: "file-type-typescript-official",
-        alt: "Typescript",
-      },
-      python: {
-        pack: "vscode-icons",
-        name: "file-type-python",
-        alt: "Python",
-      },
-      react: {
-        pack: "vscode-icons",
-        name: "file-type-reactjs",
-        alt: "React",
-      },
-      tailwind: {
-        pack: "vscode-icons",
-        name: "file-type-tailwind",
-        alt: "Tailwind",
-      },
-      javascript: {
-        pack: "vscode-icons",
-        name: "file-type-astro",
-        alt: "Astro",
-      },
-      git: {
-        pack: "vscode-icons",
-        name: "file-type-git",
-        alt: "Git",
-      },
-      sql: {
-        pack: "vscode-icons",
-        name: "file-type-sql",
-        alt: "SQL (MySQL | PostgreSQL | SQLite)",
-      },
-      tauri: {
-        pack: "skill-icons",
-        name: "tauri-light",
-        alt: "SQL",
-      },
-    };
-    const showText = (event) => {
-      const button = event.currentTarget;
-      const buttonId = button.id;
-      const key = buttonId.replace("show-logo-text-", "");
+<script is:inline is:module>
+  const IconsObject = {
+    typescript: {
+      pack: "vscode-icons",
+      name: "file-type-typescript-official",
+      alt: "Typescript",
+    },
+    javascript: {
+      pack: "vscode-icons",
+      name: "file-type-light-js",
+      alt: "Javascript",
+    },
+    python: {
+      pack: "vscode-icons",
+      name: "file-type-python",
+      alt: "Python",
+    },
+    react: {
+      pack: "vscode-icons",
+      name: "file-type-reactjs",
+      alt: "React",
+    },
+    nextjs: {
+      pack: "vscode-icons",
+      name: "file-type-next",
+      alt: "NextJS",
+    },
+    tailwind: {
+      pack: "vscode-icons",
+      name: "file-type-tailwind",
+      alt: "Tailwind",
+    },
+    astro: {
+      pack: "vscode-icons",
+      name: "file-type-astro",
+      alt: "Astro",
+    },
+    git: {
+      pack: "vscode-icons",
+      name: "file-type-git",
+      alt: "Git",
+    },
 
-      const altText = IconsObject.hasOwnProperty(key)
-        ? IconsObject[key].alt
-        : "Unknown";
+    mysql: {
+      pack: "vscode-icons",
+      name: "file-type-mysql",
+      alt: "MySQL",
+      class: "text-white",
+    },
+    postgre: {
+      pack: "vscode-icons",
+      name: "file-type-pgsql",
+      alt: "PostgreSQL",
+      class: "text-white",
+    },
+  };
+  const showText = (event) => {
+    const button = event.currentTarget;
+    const buttonId = button.id;
+    const key = buttonId.replace("show-logo-text-", "");
 
-      // Check if span is already open
-      const span = button.querySelector(".icon-text");
-      if (span) {
-        // If same button is clicked again, close the span
-        if (span.textContent === altText) {
-          button.removeChild(span);
-          return;
-        }
-        // If different button is clicked, close open span and open new one
+    const altText = IconsObject.hasOwnProperty(key)
+      ? IconsObject[key].alt
+      : "Unknown";
+
+    // Check if span is already open
+    const span = button.querySelector(".icon-text");
+    if (span) {
+      // If same button is clicked again, close the span
+      if (span.textContent === altText) {
+        button.removeChild(span);
+        return;
+      }
+      // If different button is clicked, close open span and open new one
+      span.parentNode.removeChild(span);
+    }
+
+    // Show new span
+    const newSpan = document.createElement("span");
+    newSpan.textContent = altText;
+    newSpan.classList.add("icon-text");
+    newSpan.classList.add("show");
+    newSpan.classList.add("text-small");
+    button.appendChild(newSpan);
+
+    // Close any other open spans
+    const openSpans = document.querySelectorAll(".icon-text");
+    openSpans.forEach((span) => {
+      if (span !== newSpan) {
         span.parentNode.removeChild(span);
       }
-
-      // Show new span
-      const newSpan = document.createElement("span");
-      newSpan.textContent = altText;
-      newSpan.classList.add("icon-text");
-      newSpan.classList.add("show");
-      newSpan.classList.add("text-small");
-      button.appendChild(newSpan);
-
-      // Close any other open spans
-      const openSpans = document.querySelectorAll(".icon-text");
-      openSpans.forEach((span) => {
-        if (span !== newSpan) {
-          span.parentNode.removeChild(span);
-        }
-      });
-    };
-  </script>
-</div>
+    });
+  };
+</script>

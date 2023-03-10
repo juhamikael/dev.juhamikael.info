@@ -13,15 +13,7 @@ const blogSchema = z.object({
   preview: z.string(),
   // subject : string with few different options
   subject: z.string().refine((value) => {
-    const subjects = [
-      "Music Production",
-      "Web Development",
-      "Programming",
-      "Music",
-      "Gaming",
-      "Tools",
-      "Other",
-    ];
+    const subjects = ["Music", "Software Developement", "Other"];
     return subjects.includes(value);
   }),
 });

@@ -1,0 +1,38 @@
+---
+const { posts } = Astro.props;
+import createSlug from "../../lib/createSlug";
+import { Icon } from "astro-icon";
+import { getDate } from "../../lib/utils";
+---
+
+<div class="flex justify-center">
+  <div class="mx-14 w-80 lg:mx-0">
+    {
+      posts.map((post) => (
+        <>
+          <a href={`/blog/${createSlug(post.data.title)}`} class="p-2">
+            <div class="zoom flex h-36 flex-col place-content-center rounded-xl px-6 hover:bg-gray-700/20  ">
+              <h1 class="change-text-color text-base font-bold text-yellow-300">
+                {post.data.title}
+              </h1>
+              <h2 class="mt-1 text-xs">{post.data.subject}</h2>
+
+              <p class="mt-4 text-sm text-gray-500">{post.data.preview}</p>
+              <div class="mt-4 flex flex-row place-items-center">
+                <Icon
+                  pack="ion"
+                  name="calendar-clear-outline"
+                  class="mr-2 w-5"
+                />
+                <p class="text-sm">{getDate(post.data.createdAt)}</p>
+              </div>
+            </div>
+          </a>
+          <div class="flex justify-center">
+            <div class="my-4 w-full border border-gray-200/5" />
+          </div>
+        </>
+      ))
+    }
+  </div>
+</div>

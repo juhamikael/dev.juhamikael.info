@@ -17,7 +17,25 @@
 /* Mostly used in ../components/astro/Wecolme.astro*/
 
 .text-small {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
+}
+
+@media (min-width: 640px) {
+  .text-small {
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .text-small {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-small {
+    font-size: 0.85rem;
+  }
 }
 
 .smooth-transition:hover > svg {
