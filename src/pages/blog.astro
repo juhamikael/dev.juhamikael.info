@@ -33,15 +33,13 @@ const recentOtherPosts = [...otherPosts].sort(
 ---
 
 <Layout>
-  <section
-    class="mx-auto grid min-h-screen w-screen max-w-screen-xl grid-cols-3"
-  >
-    <div class="border-r border-gray-200/10 pr-4">
-      <h1 class="text-center font-bold">Tech</h1>
-      <hr class="my-2 border-gray-300/10" />
-      <RecentPosts posts={recentTechPosts} />
-    </div>
-    <div class="border-r border-gray-200/10 px-4">
+  <section class="mx-auto grid min-h-screen w-screen max-w-screen-xl">
+    <!-- <div class="border-r border-gray-200/10 pr-4"> -->
+    <!-- <h1 class="text-center font-bold">Tech</h1> -->
+    <!-- <hr class="my-2 border-gray-300/10" /> -->
+    <RecentPosts posts={recentTechPosts} />
+    <!-- </div> -->
+    <!-- <div class="border-r border-gray-200/10 px-4">
       <h1 class="text-center font-bold">Music Production</h1>
       <hr class="my-2 border-gray-300/10" />
       <RecentPosts posts={recentMusicPosts} />
@@ -50,6 +48,6 @@ const recentOtherPosts = [...otherPosts].sort(
       <h1 class="text-center font-bold">Other</h1>
       <hr class="my-2 border-gray-300/10" />
       <RecentPosts posts={recentOtherPosts} />
-    </div>
+    </div> -->
   </section>
 </Layout>
