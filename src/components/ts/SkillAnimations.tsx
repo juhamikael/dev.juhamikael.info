@@ -1,6 +1,5 @@
 import "../../styles/SkillAnimations.css";
 
-
 interface IAnimationProps {
   language: string;
   howMany: number;
@@ -37,15 +36,15 @@ export const SkillsBar = (dataset: Object) => {
 };
 
 const splitByCommans = (string: string[]) => {
-    let newString = "";
-    for (let i = 0; i < string.length; i++) {
-        if (i === string.length - 1) {
-            newString += string[i];
-        } else {
-            newString += string[i] + ", ";
-        }
+  let newString = "";
+  for (let i = 0; i < string.length; i++) {
+    if (i === string.length - 1) {
+      newString += string[i];
+    } else {
+      newString += string[i] + ", ";
     }
-    return newString;
+  }
+  return newString;
 };
 
 const SkillsAnimations: React.FC<IAnimationProps> = (props) => {
@@ -80,14 +79,16 @@ const SkillsAnimations: React.FC<IAnimationProps> = (props) => {
   }
 
   return (
-    <div className="flex justify-center my-5 ">
-      <div className="flex flex-col justify-center w-full text-white">
+    <div className="my-5 flex justify-center ">
+      <div className="flex w-full flex-col justify-center text-white">
         <div>
-          <div className="font-bold text-xl">{language}</div>
-          <div className="text-sm text-yellow-200 font-bold">{splitByCommans(additionalText)}</div>
+          <div className="text-lg font-bold">{language}</div>
+          <div className="mt-1 text-xs font-bold text-yellow-200">
+            {splitByCommans(additionalText)}
+          </div>
         </div>
-        <div className="flex flex-row space-x-1 my-4 ">{elements}</div>
-        <div className="text-sm">
+        <div className="my-3 flex flex-row space-x-1 ">{elements}</div>
+        <div className="text-xs">
           {howMany === 1 ? (
             <>{skillLevelArray[0]}</>
           ) : (

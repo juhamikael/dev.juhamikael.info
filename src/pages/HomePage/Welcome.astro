@@ -11,7 +11,7 @@ async function getStaticPaths() {
   }));
 }
 const staticPath = await getStaticPaths();
-const { data, render } = staticPath[0].props;
+const { render } = staticPath[0].props;
 const { Content } = await render();
 
 const IconsObject: {
@@ -63,8 +63,8 @@ const IconsObject: {
       <img
         src={image}
         alt="Profile picture"
-        style="width: 12rem; height: 18rem; align-self:flex-start; object-fit: cover; object-position: right;"
-        class="rounded-xl"
+        style="align-self:flex-start; object-fit: cover; object-position: right;"
+        class="w-max rounded-xl"
       />
     </section>
     <div class="col-span-4 col-start-2 mx-6 flex flex-col place-content-center">

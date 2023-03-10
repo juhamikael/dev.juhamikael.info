@@ -1,10 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import WorkExperience from "../components/astro/Portfolio/WorkExperience.astro";
-import TrainingAndQualifications from "../components/astro/Portfolio/Qualifications.astro";
+import WorkExperience from "./Portfolio/WorkExperience.astro";
+import TrainingAndQualifications from "./Portfolio/Qualifications.astro";
 ---
 
 <Layout>
-  <TrainingAndQualifications />
-  <WorkExperience />
+  <div class="mx-8 grid place-content-center">
+    <TrainingAndQualifications />
+    <WorkExperience />
+  </div>
 </Layout>

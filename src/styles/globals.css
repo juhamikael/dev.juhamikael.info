@@ -17,7 +17,7 @@
 /* Mostly used in ../components/astro/Wecolme.astro*/
 
 .text-small {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
 }
 
 .smooth-transition:hover > svg {

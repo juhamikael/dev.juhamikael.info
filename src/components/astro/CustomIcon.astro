@@ -1,0 +1,21 @@
+---
+import { Icon } from "astro-icon";
+
+const { linkExists, iconName, iconPack, href, text } = Astro.props;
+---
+
+<>
+  {
+    linkExists !== "" && (
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        class="flex flex-row place-items-center text-sm font-bold text-yellow-400 hover:text-green-400"
+      >
+        <Icon pack={iconPack} name={iconName} class="mr-1 w-6" />
+        {text}
+      </a>
+    )
+  }
+</>

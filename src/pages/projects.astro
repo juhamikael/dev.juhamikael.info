@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import Image from "../components/ts/Projects";
 import createSlug from "../lib/createSlug";
 import { Icon } from "astro-icon";
+import CustomIcon from "../components/astro/CustomIcon.astro";
 
 const allProjects = await getCollection("projects");
 
@@ -64,52 +65,31 @@ const { Content } = await render();
                 </section>
 
                 <div class="ml-4 flex place-items-center space-x-6">
-                  {project.data.github !== "" && (
-                    <a
-                      href={project.data.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      class="flex flex-row place-items-center text-sm font-bold text-yellow-400 hover:text-green-400"
-                    >
-                      <Icon pack="ion" name="logo-github" class="mr-1 w-6" />
-                      Github
-                    </a>
-                  )}
+                  <CustomIcon
+                    linkExists={project.data.github}
+                    href={project.data.github}
+                    iconName="logo-github"
+                    text="Github"
+                    iconPack="ion"
+                  />
+                  <CustomIcon
+                    linkExists={project.data.liveDemo}
+                    href={project.data.liveDemo}
+                    iconName="projector-screen-chart-light"
+                    text="Live Demo"
+                    iconPack="ph"
+                  />
+                  <CustomIcon
+                    linkExists={project.data.download}
+                    href={project.data.download}
+                    iconName="baseline-download"
+                    text="Download"
+                    iconPack="ic"
+                  />
 
-                  {project.data.liveDemo !== "" && (
-                    <a
-                      href={project.data.liveDemo}
-                      target="_blank"
-                      rel="noreferrer"
-                      class="flex flex-row place-items-center text-sm font-bold text-yellow-400 hover:text-green-400"
-                    >
-                      <Icon
-                        pack="ph"
-                        name="projector-screen-chart-light"
-                        class="mr-1 w-6"
-                      />
-                      Live Demo
-                    </a>
-                  )}
-                  {project.data.download && (
-                    <a
-                      href={project.data.download}
-                      target="_blank"
-                      rel="noreferrer"
-                      class="flex flex-row place-items-center text-sm font-bold text-yellow-400 hover:text-green-400"
-                    >
-                      <Icon
-                        pack="ic"
-                        name="baseline-download"
-                        class="mr-1 w-6"
-                      />
-                      Download
-                    </a>
-                  )}
                   {project.data.blog && (
                     <a
                       href={`/blogs/${createSlug(project.data.title)}`}
-                      target="_blank"
                       rel="noreferrer"
                       class="flex flex-row place-items-center text-sm font-bold text-yellow-400 hover:text-green-400"
                     >
