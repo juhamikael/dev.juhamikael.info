@@ -1,4 +1,4 @@
-export const modifyBody = (body: string) => {
+export const modifyBody = async (body: string) => {
   // If "\r\n" is found, parse it as a new line
 
   if (body.includes("\r\n")) {
