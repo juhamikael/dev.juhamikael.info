@@ -1,2 +1,2 @@
 # Web developement focused personal website
-## https://code.juhamikael.info
+## https://dev.juhamikael.info
