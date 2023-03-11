@@ -1,11 +1,11 @@
 ---
-title: "Juhamikael.info"
+title: "dev.juhamikael.info"
 tags: ["Astro", "TypeScript", "React", "TailwindCSS"]
-liveDemo: ""
-id: "juhamikael-website"
+liveDemo: "https://www.juhamikael.info/"
+id: "dev-juhamikael"
 blog: false
 date: 2023-03-01
-github: "https://www.juhamikael.info/"
+github: "https://github.com/juhamikael/dev.juhamikael.info"
 download: ""
 image: ""
 ---
