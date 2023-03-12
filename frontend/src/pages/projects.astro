@@ -1,0 +1,98 @@
+---
+import { Icon } from "astro-icon";
+import { getAllProjects } from "../lib/api";
+import { createImageUrl } from "../lib/utils"
+import Layout from "../layouts/Layout.astro";
+import createSlug from "../lib/createSlug";
+import CustomIcon from "../components/astro/CustomIcon.astro";
+import Markdown from "@astrojs/markdown-component";
+
+const projects = await getAllProjects();
+
+const recentProjects = [...projects].sort(
+  (a, b) =>
+    (new Date(b.date) as unknown as number) -
+    (new Date(a.date) as unknown as number)
+);
+
+const prose_a =
+  "prose-a:text-yellow-100 prose-a:font-bold hover:prose-a:text-blue-400";
+---
+
+<Layout>
+  <div class="flex justify-center text-white">
+    <div class="mx-4 lg:w-1/2">
+      {
+        recentProjects.map((project) => (
+          <div
+            class="mt-4 rounded-xl border border-white/10 p-5"
+            id={project.slug.current}
+          >
+            <section>
+              <div class="my-2 w-fit">
+                <div
+                  class={`${
+                    project.image ? "mx-4 grid lg:grid-cols-2" : "mx-4"
+                  }`}
+                >
+                  <div>
+                    <h1 class="text-xl font-bold">{project.projectName}</h1>
+                    <div class="text-sm">
+                      {project.myTags
+                        .map((tag: { value: any }) => tag.value)
+                        .join(", ")}
+                    </div>
+                    <div class={`${prose_a} prose mt-6 text-sm text-white `}>
+                      <Markdown>{project.body.markdownEditor}</Markdown>
+                    </div>
+                  </div>
+                  {project.image && 
+                    <img 
+                      src = {createImageUrl(project.image.asset._ref)}
+                      class="mt-4 rounded-md border border-white/5 p-2 lg:ml-4"
+                    />
+                  }
+                </div>
+              </div>
+            </section>
+
+            <div class="ml-4 flex place-items-center space-x-6">
+              <CustomIcon
+                linkExists={project.githubLink}
+                href={project.githubLink}
+                iconName="logo-github"
+                text="Github"
+                iconPack="ion"
+              />
+              <CustomIcon
+                linkExists={project.liveLink}
+                href={project.liveLink}
+                iconName="projector-screen-chart-light"
+                text="Live"
+                iconPack="ph"
+              />
+              <CustomIcon
+                linkExists={project.downloadLink}
+                href={project.downloadLink}
+                iconName="baseline-download"
+                text="Download"
+                iconPack="ic"
+              />
+
+              {project.hasBlogPost && (
+                <a
+                  href={`/blogs/${createSlug(project.slug.current)}`}
+                  rel="noreferrer"
+                  class="flex flex-row place-items-center text-sm font-bold text-yellow-400 hover:text-blue-400"
+                >
+                  <Icon pack="mdi" name="blog-outline" class="mr-1 w-6" />
+                  Blog Post
+                </a>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

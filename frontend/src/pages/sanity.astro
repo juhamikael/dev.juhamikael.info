@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { urlForImage } from "../lib/api";
+import { getAllProjects } from "../lib/api";
+const projects = await getAllProjects();
+const createImageUrl = (ref:string) => {
+  // string e.g. image-4e06a01fb69606bb9708cd265295c863669efe61-497x464-jpg
+  // From string, remove image- and -jpg and add .jpg
+  const imageId = ref.replace('image-', '').replace('-jpg', '');
+  return `https://cdn.sanity.io/images/87bqw7hf/production/${imageId}.jpg`;
+};
+---
+
+<Layout>
+  <main>
+
+    <p>
+      {
+        projects.map((project) => (
+          <div>
+            <h2>{project.projectName}</h2>
+            <p>{project.description}</p>
+            {project.image && (
+              console.log(createImageUrl(project.image.asset._ref)),
+              <img src={createImageUrl(project.image.asset._ref)} />
+              
+            )}
+          </div>
+        ))
+      }
+    </p>
+  </main>
+</Layout>
